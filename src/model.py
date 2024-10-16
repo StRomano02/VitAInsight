@@ -17,7 +17,7 @@ def evaluate_model(model, X_test, y_test):
 if __name__ == "__main__":
     from data_preprocessing import load_data, preprocess_data
 
-    df = load_data('data/raw/diabetes.csv')  # Sostituisci con il tuo percorso di dataset
+    df = load_data('data/raw/diabetes.csv') 
     X_train, X_test, y_train, y_test = preprocess_data(df)
 
     model = train_model(X_train, y_train)
