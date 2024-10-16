@@ -3,15 +3,9 @@
 import pandas as pd
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler
+from utils import load_data
 import joblib
 import os
-
-
-def load_data(file_path):
-    """
-    Load the dataset from the specified file path.
-    """
-    return pd.read_csv(file_path)
 
 
 def preprocess_data(df, target_column):

@@ -1,8 +1,12 @@
 import streamlit as st
+
+# Importa le funzioni per le varie pagine
 from diabetes_prediction import diabetes_page
 from heart_disease_prediction import heart_disease_page
 from breast_cancer_prediction import breast_cancer_page
 from obesity_prediction import obesity_page
+from home_page import home_page
+from dataset_analysis import dataset_analysis_page
 
 # Sidebar for navigation
 st.sidebar.title("Navigation")
@@ -16,15 +20,8 @@ selection = st.sidebar.radio("Choose an option:", [
 ])
 
 if selection == "Home":
-    st.title("Health Risk Prediction Dashboard")
-    st.write("Welcome to the health risk prediction platform.")
-    
-    image_path = 'images/logo.png' 
-    try:
-        st.image(image_path, caption="Your health matters!", use_column_width=True)
-    except FileNotFoundError:
-        st.write("Image not found. Please check the path.")
-    
+    home_page()  # Calls the home page function
+
 elif selection == "Diabetes Prediction":
     diabetes_page()  # Calls the diabetes prediction page function
 
@@ -37,13 +34,5 @@ elif selection == "Breast Cancer Prediction":
 elif selection == "Obesity Prediction":
     obesity_page()  # Calls the obesity prediction page function
 
-
-
-
-
-
-
-
-
-
-
+elif selection == "Data Analysis":
+    dataset_analysis_page()  # Calls the dataset analysis page function
