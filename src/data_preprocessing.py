@@ -14,13 +14,12 @@ def preprocess_data(df):
     # df.fillna(df.mean(), inplace=True) 
     # non utilizziamo questa funzione perchè per le pregnancies non è 
     # corretto utilizzare come valore NaN lo 0 e sostituirlo con la media
-    
-    df['Glucose'].replace(0, df['Glucose'].mean(), inplace=True)
-    df['BloodPressure'].replace(0, df['BloodPressure'].mean(), inplace=True)
-    df['SkinThickness'].replace(0, df['SkinThickness'].mean(), inplace=True)
-    df['Insulin'].replace(0, df['Insulin'].mean(), inplace=True)
-    df['BMI'].replace(0, df['BMI'].mean(), inplace=True)
-    
+    df['Glucose'] = df['Glucose'].replace(0, df['Glucose'].mean())
+    df['BloodPressure'] = df['BloodPressure'].replace(0, df['BloodPressure'].mean())
+    df['SkinThickness'] = df['SkinThickness'].replace(0, df['SkinThickness'].mean())
+    df['Insulin'] = df['Insulin'].replace(0, df['Insulin'].mean())
+    df['BMI'] = df['BMI'].replace(0, df['BMI'].mean())
+
     # Codifica delle variabili categoriche (one-hot encoding)
     # anche se credo siano tutti valori numerici
     df = pd.get_dummies(df)
