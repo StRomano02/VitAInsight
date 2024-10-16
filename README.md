@@ -5,9 +5,3 @@ Questo progetto utilizza tecniche di machine learning per prevedere il rischio d
 
 ## Requisiti
 Assicurati di avere installato Python 3 e le librerie necessarie specificate nel file `requirements.txt`.
-
-## Installazione
-1. Clona il repository:
-   ```bash
-   git clone <URL del tuo repository>
-   cd chronic_disease_prediction
