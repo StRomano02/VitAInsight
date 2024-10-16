@@ -6,40 +6,60 @@ from sklearn.preprocessing import StandardScaler
 import joblib
 import os
 
+
 def load_data(file_path):
-    """Load the dataset."""
+    """
+    Load the dataset from the specified file path.
+    """
     return pd.read_csv(file_path)
 
-def preprocess_data(df):
-    """Preprocess the data by handling missing values and normalizing numerical features."""
-    
-    df['Glucose'] = df['Glucose'].replace(0, df['Glucose'].mean())
-    df['BloodPressure'] = df['BloodPressure'].replace(0, df['BloodPressure'].mean())
-    df['SkinThickness'] = df['SkinThickness'].replace(0, df['SkinThickness'].mean())
-    df['Insulin'] = df['Insulin'].replace(0, df['Insulin'].mean())
-    df['BMI'] = df['BMI'].replace(0, df['BMI'].mean())
+
+def preprocess_data(df, target_column):
+    """
+    Preprocess the dataset by handling missing values and normalizing numerical features.
+    Parameters:
+        df (pd.DataFrame): The dataset to preprocess.
+        target_column (str): The name of the target column in the dataset.
+    Returns:
+        X_train, X_test, y_train, y_test, scaler: Preprocessed training and test sets and the scaler used.
+    """
+    # Handle missing values or replace invalid values (e.g., 0 for glucose, BMI, etc.)
+    for column in df.columns:
+        if df[column].dtype in ['int64', 'float64'] and column != target_column:
+            if df[column].min() == 0:  # Assuming 0 is an invalid value for these features
+                df[column] = df[column].replace(0, df[column].mean())
 
     # Separate features and target
-    X = df.drop('Outcome', axis=1) 
-    y = df['Outcome']
+    X = df.drop(target_column, axis=1)
+    y = df[target_column]
 
     # Split into training and test sets
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=42)
 
     # Normalize features
     scaler = StandardScaler()
-    X_train = scaler.fit_transform(X_train)
-    X_test = scaler.transform(X_test)
+    X_train_scaled = scaler.fit_transform(X_train)
+    X_test_scaled = scaler.transform(X_test)
 
-    # Ensure the directory exists
-    os.makedirs('data/preprocessed', exist_ok=True)
+    return X_train_scaled, X_test_scaled, y_train, y_test, scaler
 
-    # Save the scaler for future use
-    joblib.dump(scaler, 'data/preprocessed/scaler.pkl')
-    print("Scaler saved correctly as 'data/preprocessed/scaler.pkl'")
 
-    return X_train, X_test, y_train, y_test
+def save_scaler(scaler, filepath):
+    """
+    Save the scaler to a specified file path.
+    Parameters:
+        scaler: The scaler to save.
+        filepath (str): The file path where the scaler should be saved.
+    """
+    os.makedirs(os.path.dirname(filepath), exist_ok=True)
+    joblib.dump(scaler, filepath)
+    print(f"Scaler saved to {filepath}")
+
 
 if __name__ == "__main__":
-    df = load_data('data/raw/diabetes.csv') 
-    X_train, X_test, y_train, y_test = preprocess_data(df)
+    # Example usage for diabetes dataset
+    df = load_data('data/raw/diabetes.csv')
+    X_train, X_test, y_train, y_test, scaler = preprocess_data(df, target_column='Outcome')
+
+    # Save the scaler for future use
+    save_scaler(scaler, 'data/preprocessed/diabetes_scaler.pkl')
