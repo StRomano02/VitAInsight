@@ -20,6 +20,10 @@ def load_data(file_path):
     """
     return pd.read_csv(file_path)
 
+
+def display_image():
+    st.image('images/health_dashboard_image.png', caption='Health Risk Prediction Dashboard', use_column_width=True)
+
 def display_gauge_chart(risk_level, title="Risk Level"):
     # Definire i limiti del rischio
     gauge_value = 40 if risk_level == 0 else 90

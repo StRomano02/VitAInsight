@@ -2,13 +2,9 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 import seaborn as sns
-from utils import load_model, load_data
+from utils import load_data
 import streamlit as st
-from diabetes_prediction import diabetes_page
-from heart_disease_prediction import heart_disease_page
-from breast_cancer_prediction import breast_cancer_page
-from obesity_prediction import obesity_page
-from home_page import home_page
+
 
 
 def dataset_analysis_page():
