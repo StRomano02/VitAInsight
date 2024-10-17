@@ -2,7 +2,7 @@
 
 import streamlit as st
 import pandas as pd
-from utils import load_model
+from utils import load_model, display_gauge_chart_obesity
 
 def obesity_page():
     st.header("Obesity Risk Prediction")
@@ -46,10 +46,10 @@ def obesity_page():
             'Obesity_Type_III': "You have Obesity Type III. It is important to work closely with a healthcare provider to manage your condition."
         }
 
-        # Get the user-friendly message for the predicted class
+        # Utilizzo dopo la predizione per Obesity Prediction
+        prediction_label = prediction[0]
         result_message = prediction_mapping.get(prediction, "Unknown prediction. Please consult a healthcare professional.")
-
-        # Display result
-        st.markdown(f"<h2 style='color:red;'>{result_message}</h2>", unsafe_allow_html=True)
+        st.markdown(f"<h2 style='color:blue;'>Obesity Risk: {result_message}</h2>", unsafe_allow_html=True)
+        display_gauge_chart_obesity(prediction_label)
 
     

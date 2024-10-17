@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils import load_model
+from utils import load_model, display_gauge_chart
 
 def breast_cancer_page():
     st.header("Breast Cancer Risk Prediction")
@@ -56,10 +56,12 @@ def breast_cancer_page():
                                            'Concave Points Worst', 'Symmetry Worst', 'Fractal Dimension Worst'])
 
         # Make prediction
-        prediction = model.predict(input_data)
-
-        # Display result
+        prediction = model.predict(input_data) 
+ 
+        # Stampa di un messaggio di rischio
         if prediction[0] == 1:
             st.markdown("<h2 style='color:red;'>High Risk of Breast Cancer</h2>", unsafe_allow_html=True)
+            display_gauge_chart(risk_level=1, title="Risk Level: High")
         else:
             st.markdown("<h2 style='color:green;'>Low Risk of Breast Cancer</h2>", unsafe_allow_html=True)
+            display_gauge_chart(risk_level=0, title="Risk Level: Low")

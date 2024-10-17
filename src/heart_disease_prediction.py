@@ -2,7 +2,7 @@
 
 import streamlit as st
 import pandas as pd
-from utils import load_model
+from utils import load_model, display_gauge_chart
 
 def heart_disease_page():
     st.header("Heart Disease Risk Prediction")
@@ -34,6 +34,8 @@ def heart_disease_page():
         # Display result
         if prediction[0] == 1:
             st.markdown("<h2 style='color:red;'>High Risk of Heart Disease</h2>", unsafe_allow_html=True)
+            display_gauge_chart(risk_level=1, title="Heart Disease Risk Level: High")
         else:
             st.markdown("<h2 style='color:green;'>Low Risk of Heart Disease</h2>", unsafe_allow_html=True)
+            display_gauge_chart(risk_level=0, title="Heart Disease Risk Level: Low")
 

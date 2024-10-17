@@ -1,6 +1,6 @@
 import streamlit as st
 import pandas as pd
-from utils import load_model, preprocess_input
+from utils import load_model, preprocess_input, display_gauge_chart
 
 def diabetes_page():
     st.header("Diabetes Risk Prediction")
@@ -30,8 +30,10 @@ def diabetes_page():
         # Make prediction
         prediction = model.predict(input_data_scaled)
         
-        # Display result
+        #Display result 
         if prediction[0] == 1:
-            st.markdown("<h2 style='color:red;'>High Risk of Diabetes</h2>", unsafe_allow_html=True)
+           st.markdown("<h2 style='color:red;'>High Risk of Diabetes</h2>", unsafe_allow_html=True)
+           display_gauge_chart(risk_level=1, title="Diabetes Risk Level: High")
         else:
-            st.markdown("<h2 style='color:green;'>Low Risk of Diabetes</h2>", unsafe_allow_html=True)
+           st.markdown("<h2 style='color:green;'>Low Risk of Diabetes</h2>", unsafe_allow_html=True)
+           display_gauge_chart(risk_level=0, title="Diabetes Risk Level: Low")
