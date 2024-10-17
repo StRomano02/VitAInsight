@@ -52,16 +52,43 @@ def dataset_analysis_page():
     ax.set_title(f"Boxplot of {selected_variable} by {target_column}")
     ax.set_xlabel(f"{target_column} (0 = Low Risk, 1 = High Risk)")
     ax.set_ylabel(f"Value of {selected_variable}")
+    plt.xticks(rotation=45)
     st.pyplot(fig)
+    
+    # Filtra solo colonne numeriche
+    df_numeric = df.select_dtypes(include='number')
+
+    # Verifica se la colonna target è presente nel dataset
+    if target_column in df_numeric.columns:
+        # Calcola la matrice di correlazione
+        corr_matrix = df_numeric.corr()
+
+        # Seleziona solo le variabili che hanno una correlazione significativa con la colonna target
+        target_corr = corr_matrix[target_column].abs().sort_values(ascending=False)
+        significant_features = target_corr[target_corr > 0.15].index  # Cambia la soglia a seconda delle esigenze
+
+        # Limita il numero di variabili mostrate (ad esempio, le prime 10 variabili più correlate)
+        if len(significant_features) > 10:
+            significant_features = significant_features[:10]
+
+        # Utilizza solo le variabili significative se ce ne sono più di una (altrimenti usa tutte)
+        if len(significant_features) > 1:
+            df_to_plot = df_numeric[significant_features]
+            st.subheader("Correlation Heatmap (Significant Variables with Correlation > 0.15)")
+        else:
+            df_to_plot = df_numeric
+            st.subheader("Correlation Heatmap (All Variables)")
+    else:
+        df_to_plot = df_numeric
+        st.subheader("Correlation Heatmap (All Variables)")
 
     # Heatmap di correlazione
-    st.subheader("Correlation Heatmap")
     fig, ax = plt.subplots(figsize=(10, 8))
-    sns.heatmap(df.corr(), annot=True, cmap='coolwarm', linewidths=0.5, ax=ax)
-    ax.set_title(f"Correlation Heatmap of Variables in {dataset_choice} Dataset")
+    sns.heatmap(df_to_plot.corr(), annot=True, cmap='coolwarm', linewidths=0.5, ax=ax)
+    ax.set_title("Correlation Heatmap")
     st.pyplot(fig)
 
-    # Distribuzione delle variabili e confronto con l'input dell'utente (se disponibile)
+    # Distribuzione delle variabili e confronto con l'input dell'utente 
     st.subheader("Visualization of Dataset Distribution")
     col1, col2 = st.columns(2)
 
@@ -77,18 +104,3 @@ def dataset_analysis_page():
         else:
             col2.pyplot(fig)
 
-# Aggiornare l'app per includere la nuova pagina
-page = st.sidebar.radio("Choose an option:", ["Home", "Diabetes Prediction", "Heart Disease Prediction", "Breast Cancer Prediction", "Obesity Prediction", "Dataset Analysis"])
-
-if page == "Home":
-    home_page()
-elif page == "Diabetes Prediction":
-    diabetes_page()
-elif page == "Heart Disease Prediction":
-    heart_disease_page()
-elif page == "Breast Cancer Prediction":
-    breast_cancer_page()
-elif page == "Obesity Prediction":
-    obesity_page()
-elif page == "Dataset Analysis":
-    dataset_analysis_page()
