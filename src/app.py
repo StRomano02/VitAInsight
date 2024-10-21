@@ -42,28 +42,12 @@ def home_page():
     with col1:
         if st.button("Diabetes Prediction"):
             st.session_state['page'] = "Diabetes Prediction"
-            st.sidebar.radio("Choose an option:", [
-                "Home",
-                "Diabetes Prediction",
-                "Heart Disease Prediction",
-                "Breast Cancer Prediction",
-                "Obesity Assessment",
-                "Data Analysis"
-            ], key="sidebar_selection", index=1)
             st.experimental_rerun()
         st.image(diabetes_image, use_column_width=True, caption="Diabetes Prediction")
 
     with col2:
         if st.button("Heart Disease Prediction"):
             st.session_state['page'] = "Heart Disease Prediction"
-            st.sidebar.radio("Choose an option:", [
-                "Home",
-                "Diabetes Prediction",
-                "Heart Disease Prediction",
-                "Breast Cancer Prediction",
-                "Obesity Assessment",
-                "Data Analysis"
-            ], key="sidebar_selection", index=2)
             st.experimental_rerun()
         st.image(heart_image, use_column_width=True, caption="Heart Disease Prediction")
 
@@ -72,28 +56,12 @@ def home_page():
     with col3:
         if st.button("Breast Cancer Prediction"):
             st.session_state['page'] = "Breast Cancer Prediction"
-            st.sidebar.radio("Choose an option:", [
-                "Home",
-                "Diabetes Prediction",
-                "Heart Disease Prediction",
-                "Breast Cancer Prediction",
-                "Obesity Assessment",
-                "Data Analysis"
-            ], key="sidebar_selection", index=3)
             st.experimental_rerun()
         st.image(cancer_image, use_column_width=True, caption="Breast Cancer Prediction")
 
     with col4:
         if st.button("Obesity Assessment"):
             st.session_state['page'] = "Obesity Assessment"
-            st.sidebar.radio("Choose an option:", [
-                "Home",
-                "Diabetes Prediction",
-                "Heart Disease Prediction",
-                "Breast Cancer Prediction",
-                "Obesity Assessment",
-                "Data Analysis"
-            ], key="sidebar_selection", index=4)
             st.experimental_rerun()
         st.image(obesity_image, use_column_width=True, caption="Obesity Assessment")
 
@@ -102,17 +70,8 @@ def home_page():
     with col5:
         if st.button("Dataset Analysis"):
             st.session_state['page'] = "Data Analysis"
-            st.sidebar.radio("Choose an option:", [
-                "Home",
-                "Diabetes Prediction",
-                "Heart Disease Prediction",
-                "Breast Cancer Prediction",
-                "Obesity Assessment",
-                "Data Analysis"
-            ], key="sidebar_selection", index=5)
             st.experimental_rerun()
         st.image(dataset_analysis_image, use_column_width=True, caption="Dataset Analysis")
-
 
 # Chiamata della pagina selezionata
 if st.session_state['page'] == "Home":
