@@ -5,3 +5,5 @@ xgboost
 matplotlib
 seaborn
 streamlit
+plotly
+sklearn
