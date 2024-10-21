@@ -17,11 +17,11 @@ dataset_analysis_image = Image.open('images/dataset_analysis.png')
 # Sidebar per la navigazione
 st.sidebar.title("Navigation")
 selection = st.sidebar.radio("Choose an option:", [
-    "Home", 
-    "Diabetes Prediction", 
-    "Heart Disease Prediction", 
-    "Breast Cancer Prediction", 
-    "Obesity Assessment", 
+    "Home",
+    "Diabetes Prediction",
+    "Heart Disease Prediction",
+    "Breast Cancer Prediction",
+    "Obesity Assessment",
     "Data Analysis"
 ])
 
@@ -29,13 +29,13 @@ selection = st.sidebar.radio("Choose an option:", [
 if 'page' not in st.session_state:
     st.session_state['page'] = "Home"
 
-# Aggiorna la pagina in base alla selezione dalla barra laterale
-st.session_state['page'] = selection
+# Aggiorna la pagina in base alla selezione della barra laterale solo se non è stata impostata da un pulsante
+if selection != st.session_state.get('page_button'):
+    st.session_state['page'] = selection
 
 # Home Page
 def home_page():
     st.title("VitAInsight: Health Risk Prediction Dashboard")
-    st.markdown("<h1 style='font-size: 36px; color: #2E86C1;'>VitAInsight: Health Risk Prediction Dashboard</h1>", unsafe_allow_html=True)
     st.write("Welcome to the health risk prediction platform. Choose an option below to begin:")
 
     col1, col2 = st.columns(2)
@@ -43,11 +43,13 @@ def home_page():
     with col1:
         if st.button("Diabetes Prediction"):
             st.session_state['page'] = "Diabetes Prediction"
+            st.session_state['page_button'] = "Diabetes Prediction"
         st.image(diabetes_image, use_column_width=True, caption="Diabetes Prediction")
-        
+
     with col2:
         if st.button("Heart Disease Prediction"):
             st.session_state['page'] = "Heart Disease Prediction"
+            st.session_state['page_button'] = "Heart Disease Prediction"
         st.image(heart_image, use_column_width=True, caption="Heart Disease Prediction")
 
     col3, col4 = st.columns(2)
@@ -55,19 +57,23 @@ def home_page():
     with col3:
         if st.button("Breast Cancer Prediction"):
             st.session_state['page'] = "Breast Cancer Prediction"
+            st.session_state['page_button'] = "Breast Cancer Prediction"
         st.image(cancer_image, use_column_width=True, caption="Breast Cancer Prediction")
 
     with col4:
         if st.button("Obesity Assessment"):
             st.session_state['page'] = "Obesity Assessment"
+            st.session_state['page_button'] = "Obesity Assessment"
         st.image(obesity_image, use_column_width=True, caption="Obesity Assessment")
-        
+
     col5, col6 = st.columns(2)
-    
+
     with col5:
         if st.button("Dataset Analysis"):
             st.session_state['page'] = "Data Analysis"
+            st.session_state['page_button'] = "Data Analysis"
         st.image(dataset_analysis_image, use_column_width=True, caption="Dataset Analysis")
+
 
 # Chiamata della pagina selezionata
 if st.session_state['page'] == "Home":
