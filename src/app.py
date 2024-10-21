@@ -7,7 +7,6 @@ from obesity_assessment import obesity_page
 from dataset_analysis import dataset_analysis_page
 
 # Load images for the homepage
-health_image = Image.open('images/health_dashboard.png')
 diabetes_image = Image.open('images/diabetes.png')
 heart_image = Image.open('images/heart_disease.png')
 cancer_image = Image.open('images/breast_cancer.png')
@@ -29,8 +28,8 @@ selection = st.sidebar.radio("Choose an option:", [
 if 'page' not in st.session_state:
     st.session_state['page'] = "Home"
 
-# Aggiorna la pagina in base alla selezione della barra laterale solo se non è stata impostata da un pulsante
-if selection != st.session_state.get('page_button'):
+# Aggiorna la pagina in base alla selezione della barra laterale
+if selection != "Home":
     st.session_state['page'] = selection
 
 # Home Page
@@ -43,13 +42,13 @@ def home_page():
     with col1:
         if st.button("Diabetes Prediction"):
             st.session_state['page'] = "Diabetes Prediction"
-            st.session_state['page_button'] = "Diabetes Prediction"
+            st.experimental_rerun()
         st.image(diabetes_image, use_column_width=True, caption="Diabetes Prediction")
 
     with col2:
         if st.button("Heart Disease Prediction"):
             st.session_state['page'] = "Heart Disease Prediction"
-            st.session_state['page_button'] = "Heart Disease Prediction"
+            st.experimental_rerun()
         st.image(heart_image, use_column_width=True, caption="Heart Disease Prediction")
 
     col3, col4 = st.columns(2)
@@ -57,13 +56,13 @@ def home_page():
     with col3:
         if st.button("Breast Cancer Prediction"):
             st.session_state['page'] = "Breast Cancer Prediction"
-            st.session_state['page_button'] = "Breast Cancer Prediction"
+            st.experimental_rerun()
         st.image(cancer_image, use_column_width=True, caption="Breast Cancer Prediction")
 
     with col4:
         if st.button("Obesity Assessment"):
             st.session_state['page'] = "Obesity Assessment"
-            st.session_state['page_button'] = "Obesity Assessment"
+            st.experimental_rerun()
         st.image(obesity_image, use_column_width=True, caption="Obesity Assessment")
 
     col5, col6 = st.columns(2)
@@ -71,7 +70,7 @@ def home_page():
     with col5:
         if st.button("Dataset Analysis"):
             st.session_state['page'] = "Data Analysis"
-            st.session_state['page_button'] = "Data Analysis"
+            st.experimental_rerun()
         st.image(dataset_analysis_image, use_column_width=True, caption="Dataset Analysis")
 
 
