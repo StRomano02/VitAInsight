@@ -73,14 +73,6 @@ If you prefer to run the platform locally, follow these steps:
 
 The local Streamlit app will be accessible in your browser at `http://localhost:8501`.
 
-## Screenshots
-### Homepage
-The VitAInsight homepage allows users to select a health assessment and view visually appealing representations for each health category.
-
-![Homepage Screenshot](images/health_dashboard.png)
-
-### Diabetes Prediction
-![Diabetes Prediction Screenshot](images/diabetes.png)
 
 ## Disclaimer
 VitAInsight is not a substitute for professional medical advice, diagnosis, or treatment. Always seek the advice of your physician or other qualified health provider with any questions you may have regarding a medical condition.
