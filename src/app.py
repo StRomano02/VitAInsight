@@ -40,37 +40,32 @@ def home_page():
     col1, col2 = st.columns(2)
 
     with col1:
-        if st.button("Diabetes Prediction"):
+        if st.button("Diabetes Prediction", key="btn_diabetes"):
             st.session_state['page'] = "Diabetes Prediction"
-            st.experimental_rerun()
         st.image(diabetes_image, use_column_width=True, caption="Diabetes Prediction")
 
     with col2:
-        if st.button("Heart Disease Prediction"):
+        if st.button("Heart Disease Prediction", key="btn_heart"):
             st.session_state['page'] = "Heart Disease Prediction"
-            st.experimental_rerun()
         st.image(heart_image, use_column_width=True, caption="Heart Disease Prediction")
 
     col3, col4 = st.columns(2)
 
     with col3:
-        if st.button("Breast Cancer Prediction"):
+        if st.button("Breast Cancer Prediction", key="btn_cancer"):
             st.session_state['page'] = "Breast Cancer Prediction"
-            st.experimental_rerun()
         st.image(cancer_image, use_column_width=True, caption="Breast Cancer Prediction")
 
     with col4:
-        if st.button("Obesity Assessment"):
+        if st.button("Obesity Assessment", key="btn_obesity"):
             st.session_state['page'] = "Obesity Assessment"
-            st.experimental_rerun()
         st.image(obesity_image, use_column_width=True, caption="Obesity Assessment")
 
     col5, col6 = st.columns(2)
 
     with col5:
-        if st.button("Dataset Analysis"):
+        if st.button("Dataset Analysis", key="btn_dataset"):
             st.session_state['page'] = "Data Analysis"
-            st.experimental_rerun()
         st.image(dataset_analysis_image, use_column_width=True, caption="Dataset Analysis")
 
 # Chiamata della pagina selezionata
