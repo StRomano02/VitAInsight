@@ -34,7 +34,8 @@ st.session_state['page'] = selection
 
 # Home Page
 def home_page():
-    st.title("Health Risk Prediction Dashboard")
+    st.title("VitAInsight: Health Risk Prediction Dashboard")
+    st.markdown("<h1 style='font-size: 36px; color: #2E86C1;'>VitAInsight: Health Risk Prediction Dashboard</h1>", unsafe_allow_html=True)
     st.write("Welcome to the health risk prediction platform. Choose an option below to begin:")
 
     col1, col2 = st.columns(2)
