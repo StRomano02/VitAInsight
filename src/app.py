@@ -3,7 +3,7 @@ from PIL import Image
 from diabetes_prediction import diabetes_page
 from heart_disease_prediction import heart_disease_page
 from breast_cancer_prediction import breast_cancer_page
-from obesity_prediction import obesity_page
+from obesity_assessment import obesity_page
 from dataset_analysis import dataset_analysis_page
 
 # Load images for the homepage
@@ -21,7 +21,7 @@ selection = st.sidebar.radio("Choose an option:", [
     "Diabetes Prediction", 
     "Heart Disease Prediction", 
     "Breast Cancer Prediction", 
-    "Obesity Prediction", 
+    "Obesity Assessment", 
     "Data Analysis"
 ])
 
@@ -57,9 +57,9 @@ def home_page():
         st.image(cancer_image, use_column_width=True, caption="Breast Cancer Prediction")
 
     with col4:
-        if st.button("Obesity Prediction"):
-            st.session_state['page'] = "Obesity Prediction"
-        st.image(obesity_image, use_column_width=True, caption="Obesity Prediction")
+        if st.button("Obesity Assessment"):
+            st.session_state['page'] = "Obesity Assessment"
+        st.image(obesity_image, use_column_width=True, caption="Obesity Assessment")
         
     col5, col6 = st.columns(2)
     
@@ -77,7 +77,7 @@ elif st.session_state['page'] == "Heart Disease Prediction":
     heart_disease_page()
 elif st.session_state['page'] == "Breast Cancer Prediction":
     breast_cancer_page()
-elif st.session_state['page'] == "Obesity Prediction":
+elif st.session_state['page'] == "Obesity Assessment":
     obesity_page()
 elif st.session_state['page'] == "Data Analysis":
     dataset_analysis_page()
